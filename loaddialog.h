@@ -28,6 +28,8 @@ private slots:
 
     void on_treeView_doubleClicked(const QModelIndex &index);
 
+    void on_DeleteButton_clicked();
+
 private:
     bool CheckTxtFile(QFile& file);
     void SetFont(QFont* font);

@@ -19,7 +19,11 @@ LoadDialog::LoadDialog(QWidget *parent) :
 
     int id = QFontDatabase::addApplicationFont(":/Font.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    ui->LoadButton->setFont(QFont(family));
+    QFont font(family);
+
+    SetFont(&font);
+
+    ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
 
 }
 
@@ -157,6 +161,40 @@ bool LoadDialog::CheckTxtFile(QFile& file)
 void LoadDialog::SetFont(QFont* font)
 {
     ui->LoadButton->setFont(*font);
-    ui->treeView->setFont(*font);
+    ui->DeleteButton->setFont(*font);
+
+}
+
+void LoadDialog::on_DeleteButton_clicked()
+{
+    QModelIndex index = ui->treeView->currentIndex();
+    QFileInfo file_info = file_model->fileInfo(index);
+    if (file_info.isFile() && file_info.completeSuffix() == "txt") {
+
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Delete file");
+        msgBox.setText("Do you realy whant to delete " + file_info.fileName() + "?");
+        msgBox.setStandardButtons(QMessageBox::Yes);
+        msgBox.addButton(QMessageBox::No);
+
+        if(msgBox.exec() == QMessageBox::Yes){
+
+            QFile::remove(file_info.absoluteFilePath());
+
+        } else {
+
+
+
+        }
+
+
+
+    } else {
+
+        QMessageBox::critical(this, "Delete file error", "Only txt files can be deleted!");
+
+    }
+
+
 }
 

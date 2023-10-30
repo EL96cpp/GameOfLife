@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>493</width>
-    <height>640</height>
+    <width>498</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@ QPushButton {
 
 QPushButton:hover { 
 	
-	
+	color: rgb(0, 0, 0);
 	background-color: rgb(150, 224, 166);
 	border-style: outset;
 	border-color: rgb(0, 90, 75);
@@ -41,8 +41,8 @@ QPushButton:hover {
     <rect>
      <x>40</x>
      <y>20</y>
-     <width>411</width>
-     <height>581</height>
+     <width>421</width>
+     <height>601</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -73,20 +73,34 @@ border-radius: 5px;</string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="LoadButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">min-width: 4.5em;</string>
-        </property>
-        <property name="text">
-         <string>LOAD</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="LoadButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">min-width: 4.5em;</string>
+          </property>
+          <property name="text">
+           <string>LOAD</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="DeleteButton">
+          <property name="styleSheet">
+           <string notr="true">min-width: 4.5em;</string>
+          </property>
+          <property name="text">
+           <string>DELETE</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
