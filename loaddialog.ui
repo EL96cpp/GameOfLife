@@ -15,11 +15,12 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#LoadDialog {
-	background-color: rgb(0, 115, 97);
+	background: url(:/background.jpg);
 }
 
 QPushButton { 
-	background-color: rgb(8, 92, 77);
+	border-radius: 5px;	
+	background-color: rgb(12, 71, 24);
 	border-style:outset;
 	border-color: rgb(0, 90, 75);
 	color: rgb(255, 255, 255);	
@@ -27,13 +28,15 @@ QPushButton {
 }
 
 QPushButton:hover { 
-	background-color: rgb(81, 161, 148);
+	
+	
+	background-color: rgb(150, 224, 166);
 	border-style: outset;
 	border-color: rgb(0, 90, 75);
 	border-width: 1px;
 }</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -46,7 +49,8 @@ QPushButton:hover {
     <item>
      <widget class="QTreeView" name="treeView">
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(139, 207, 196);</string>
+       <string notr="true">background-color: rgb(131, 182, 135);
+border-radius: 5px;</string>
       </property>
      </widget>
     </item>
@@ -80,7 +84,7 @@ QPushButton:hover {
          <string notr="true">min-width: 4.5em;</string>
         </property>
         <property name="text">
-         <string>Load</string>
+         <string>LOAD</string>
         </property>
        </widget>
       </item>

@@ -29,7 +29,7 @@ set(PROJECT_SOURCES
         loaddialog.cpp
         loaddialog.h
         loaddialog.ui
-        fonts.qrc
+        resources.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

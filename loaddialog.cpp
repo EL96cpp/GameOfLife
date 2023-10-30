@@ -1,3 +1,5 @@
+#include <QFontDatabase>
+
 #include "loaddialog.h"
 #include "ui_loaddialog.h"
 #include "game.h"
@@ -14,6 +16,11 @@ LoadDialog::LoadDialog(QWidget *parent) :
         QDir().mkdir("Game saves");
     }
     ui->treeView->setRootIndex(file_model->index(QDir::currentPath()+"/Game saves/"));
+
+    int id = QFontDatabase::addApplicationFont(":/Font.ttf");
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    ui->LoadButton->setFont(QFont(family));
+
 }
 
 LoadDialog::~LoadDialog()

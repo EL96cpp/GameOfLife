@@ -3,7 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
-    , alive_color(191, 255, 234), dead_color(60, 60, 60)
+    , alive_color(149, 208, 155), dead_color(43, 43, 43)
     , game_scene(new QGraphicsScene(this))
     , game(new Game)
 {
@@ -62,7 +62,7 @@ void MainWindow::LoadFile(const QString &file_name)
 
 void MainWindow::GameFinished()
 {
-    ui->StartStopButton->setText("Start");
+    ui->StartStopButton->setText("START");
 }
 
 void MainWindow::SetGameScene()
@@ -82,7 +82,7 @@ void MainWindow::SetGameScene()
 
 void MainWindow::SetFont()
 {
-    int id = QFontDatabase::addApplicationFont(":/fonts/Font.ttf");
+    int id = QFontDatabase::addApplicationFont(":/Font.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     font = new QFont(family);
     ui->LoadButton->setFont(*font);
@@ -98,7 +98,7 @@ void MainWindow::SetFont()
 void MainWindow::on_ClearButton_clicked()
 {
     game->ClearFields();
-    ui->StartStopButton->setText("Start");
+    ui->StartStopButton->setText("START");
     for (auto& line : graphics_field) {
         for (auto& cell : line) {
             cell->UpdateCell(false, dead_brush);
@@ -110,7 +110,7 @@ void MainWindow::on_ClearButton_clicked()
 void MainWindow::on_LoadButton_clicked()
 {
     if (game->GetGameState() == GameState::RUNNING) {
-        ui->StartStopButton->setText("Start");
+        ui->StartStopButton->setText("START");
         emit StopGame();
     }
     LoadDialog* load_dialog = new LoadDialog(this);
@@ -122,7 +122,7 @@ void MainWindow::on_LoadButton_clicked()
 void MainWindow::on_SaveButton_clicked()
 {
     if (game->GetGameState() == GameState::RUNNING) {
-        ui->StartStopButton->setText("Start");
+        ui->StartStopButton->setText("START");
         emit StopGame();
     }
     QVector<QVector<bool>> save_field = game->GetStartField();
@@ -135,10 +135,10 @@ void MainWindow::on_SaveButton_clicked()
 void MainWindow::on_StartStopButton_clicked()
 {
     if (game->GetGameState() != GameState::RUNNING) {
-        ui->StartStopButton->setText("Stop");
+        ui->StartStopButton->setText("STOP");
         emit StartGame();
     } else {
-        ui->StartStopButton->setText("Start");
+        ui->StartStopButton->setText("START ");
         emit StopGame();
     }
 }
@@ -146,7 +146,7 @@ void MainWindow::on_StartStopButton_clicked()
 
 void MainWindow::on_RestartButton_clicked()
 {
-    ui->StartStopButton->setText("Start");
+    ui->StartStopButton->setText("START");
     emit RestartGame();
 }
 

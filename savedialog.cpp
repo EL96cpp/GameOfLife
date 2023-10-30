@@ -1,3 +1,5 @@
+#include <QFontDatabase>
+
 #include "savedialog.h"
 #include "ui_savedialog.h"
 
@@ -14,6 +16,13 @@ SaveDialog::SaveDialog(QVector<QVector<bool>>& save_field, QWidget *parent) :
         QDir().mkdir("Game saves");
     }
     ui->treeView->setRootIndex(file_model->index(QDir::currentPath()+"/Game saves/"));
+
+    int id = QFontDatabase::addApplicationFont(":/Font.ttf");
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    ui->SaveButton->setFont(QFont(family));
+    ui->label->setFont(QFont(family));
+    ui->label_2->setFont(QFont(family));
+
 }
 
 SaveDialog::~SaveDialog()

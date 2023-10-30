@@ -60,10 +60,12 @@
    <property name="styleSheet">
     <string notr="true">#centralwidget {
 	background-color: rgb(0, 115, 97);
+	background: url(:/background.jpg);
 }
 
 QPushButton { 
-	background-color: rgb(8, 92, 77);
+	border-radius: 5px;	
+	background-color: rgb(12, 71, 24);
 	border-style:outset;
 	border-color: rgb(0, 90, 75);
 	color: rgb(255, 255, 255);	
@@ -71,7 +73,9 @@ QPushButton {
 }
 
 QPushButton:hover { 
-	background-color: rgb(81, 161, 148);
+	
+	color: rgb(0, 0, 0);
+	background-color: rgb(150, 224, 166);
 	border-style: outset;
 	border-color: rgb(0, 90, 75);
 	border-width: 1px;
@@ -79,21 +83,22 @@ QPushButton:hover {
 
 QScrollBar {
 	border:none;
-	background-color: rgb(0, 93, 78);
+	background-color: rgb(13, 80, 10);
 }
 
 QScrollBar::handlebar:vertical {
 	
-	background-color: rgb(6, 64, 53);
+	
+	background-color: rgb(13, 44, 19);
 	border: none;
-	border-radiuds: 3px;
+
 }
 
 QScrollBar::handlebar:vertical:pressed {
 	
-	background-color: rgb(77, 158, 142);
+	background-color: rgb(0, 129, 28);
 	border: none;
-	border-radius: 3px;
+
 }
 
 
@@ -128,8 +133,10 @@ QScrollBar::handlebar:vertical:pressed {
     </property>
     <property name="styleSheet">
      <string notr="true">#groupBox {
-background-color: rgb(22, 144, 120);
 
+border-radius: 10px;
+
+	background-color: rgba(45, 187, 50, 100);
 }
 
 </string>
@@ -163,7 +170,7 @@ background-color: rgb(22, 144, 120);
              <string notr="true">font: &quot;:/fonts/Font.ttf&quot;</string>
             </property>
             <property name="text">
-             <string>Load map</string>
+             <string>LOAD MAP</string>
             </property>
            </widget>
           </item>
@@ -173,7 +180,7 @@ background-color: rgb(22, 144, 120);
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>Save map</string>
+             <string>SAVE MAP</string>
             </property>
            </widget>
           </item>
@@ -197,7 +204,7 @@ background-color: rgb(22, 144, 120);
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>Start</string>
+             <string>START</string>
             </property>
            </widget>
           </item>
@@ -207,7 +214,7 @@ background-color: rgb(22, 144, 120);
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>Restart</string>
+             <string>RESTART</string>
             </property>
            </widget>
           </item>
@@ -217,7 +224,7 @@ background-color: rgb(22, 144, 120);
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>Clear</string>
+             <string>CLEAR</string>
             </property>
            </widget>
           </item>
@@ -236,14 +243,14 @@ background-color: rgb(22, 144, 120);
            <string notr="true">color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
-           <string>Speed:</string>
+           <string>SPEED:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSpinBox" name="spinBox">
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(8, 92, 77);
+           <string notr="true">background-color: rgb(9, 71, 23);
 color: rgb(255, 255, 255);
 selection-background-color: transparent;</string>
           </property>
@@ -282,7 +289,10 @@ selection-background-color: transparent;</string>
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(22, 144, 120);
+     <string notr="true">
+border-radius: 10px;
+
+background-color: rgba(50, 144, 48, 163);
 
 </string>
     </property>
