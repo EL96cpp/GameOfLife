@@ -5,8 +5,7 @@
 #include <QWheelEvent>
 #include <QObject>
 
-class CustomView : public QGraphicsView
-{
+class CustomView : public QGraphicsView {
 
 public:
     CustomView(QWidget *parent = nullptr);
@@ -18,6 +17,7 @@ protected:
     double current_scale = 1.0;  // stores the current scale value.
     double scale_min = 0.32; // defines the min scale limit.
     double scale_max = 5;
+
 };
 
 

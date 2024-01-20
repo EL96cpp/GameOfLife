@@ -56,15 +56,6 @@ void MainWindow::FlipCellColor(const qreal &x, const qreal &y) {
 
 }
 
-void MainWindow::SaveFile(const QString &file_name)
-{
-
-}
-
-void MainWindow::LoadFile(const QString &file_name)
-{
-
-}
 
 void MainWindow::GameFinished() {
 

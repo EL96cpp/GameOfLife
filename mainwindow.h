@@ -28,8 +28,6 @@ public:
 public slots:
     void UpdateGameScene(const QVector<QVector<bool>>& current_field);
     void FlipCellColor(const qreal& x, const qreal& y);
-    void SaveFile(const QString& file_name);
-    void LoadFile(const QString& file_name);
     void GameFinished();
 
 signals:

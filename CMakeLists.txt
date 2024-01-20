@@ -74,3 +74,7 @@ install(TARGETS GameOfLife
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(GameOfLife)
 endif()
+
+
+file(COPY "${CMAKE_SOURCE_DIR}/customview.h" DESTINATION "${CMAKE_BINARY_DIR}/GameOfLife_autogen/include")
+
