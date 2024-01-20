@@ -12,7 +12,7 @@ void CustomView::wheelEvent(QWheelEvent *event)
 {
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
-    if(event->delta() > 0) {
+    if(event->angleDelta().y() > 0) {
         if (current_scale * scale_factor <= scale_max) {
             scale(scale_factor, scale_factor);
             current_scale *= scale_factor;
