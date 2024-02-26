@@ -25,7 +25,7 @@ public:
     GameState GetGameState();
     QVector<QVector<bool>> GetStartField();
 
-public slots:
+protected slots:
     void StartGame();
     void StopGame();
     void RestartGame();
@@ -39,10 +39,10 @@ signals:
     void CalculateNextStep();
     void UpdateGameScene(const QVector<QVector<bool>>& current_field);
 
-private:
+protected:
     bool CalculateCell(const int& i, const int& j);
 
-private:
+protected:
     QVector<QVector<bool>> start_field;
     QVector<QVector<bool>> current_field;
     QVector<QVector<bool>> next_field;
