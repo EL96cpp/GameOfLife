@@ -69,12 +69,8 @@ void Game::StartGame() {
 
     }
 
-    qDebug() << "Start game";
-
     game_state = GameState::RUNNING;
     game_timer.start(1000/(game_speed*game_speed));
-
-    qDebug() << "Start timer";
 
 }
 
@@ -87,8 +83,6 @@ void Game::StopGame() {
         game_timer.stop();
 
     }
-
-    qDebug() << "game stopped!";
 
 }
 

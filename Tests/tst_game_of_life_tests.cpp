@@ -18,11 +18,44 @@ TEST_F(GameFixture, initial_tests) {
     EXPECT_EQ(game_state, GameState::EDITING);
     EXPECT_EQ(game_speed, 3);
 
+    for (int i = 0; i <  FIELD_HEIGHT; ++i) {
+
+        for (int j = 0; j < FIELD_WIDTH; ++j) {
+
+            EXPECT_EQ(start_field[i][j], false);
+            EXPECT_EQ(current_field[i][j], false);
+            EXPECT_EQ(next_field[i][j], false);
+
+        }
+
+    }
+
+}
+
+TEST_F(GameFixture, change_game_speed_tests) {
+
+    ChangeGameSpeed(1);
+    EXPECT_EQ(game_speed, 1);
+    EXPECT_EQ(game_timer.interval(), 1000/(game_speed*game_speed));
+    ChangeGameSpeed(2);
+    EXPECT_EQ(game_speed, 2);
+    EXPECT_EQ(game_timer.interval(), 1000/(game_speed*game_speed));
+    ChangeGameSpeed(3);
+    EXPECT_EQ(game_speed, 3);
+    EXPECT_EQ(game_timer.interval(), 1000/(game_speed*game_speed));
+    ChangeGameSpeed(4);
+    EXPECT_EQ(game_speed, 4);
+    EXPECT_EQ(game_timer.interval(), 1000/(game_speed*game_speed));
+    ChangeGameSpeed(5);
+    EXPECT_EQ(game_speed, 5);
+    EXPECT_EQ(game_timer.interval(), 1000/(game_speed*game_speed));
+
 }
 
 TEST_F(GameFixture, flip_corner_cells_tests) {
 
     //Upper left corner case
+
     FlipCellState(0, 0);
     EXPECT_EQ(start_field[0][0], true);
     EXPECT_EQ(start_field[0][1], false);
@@ -37,6 +70,7 @@ TEST_F(GameFixture, flip_corner_cells_tests) {
 
 
     //Lower left corner case
+
     FlipCellState(0, (FIELD_HEIGHT-1)*10);
     EXPECT_EQ(start_field[FIELD_HEIGHT-2][0], false);
     EXPECT_EQ(start_field[FIELD_HEIGHT-2][1], false);
@@ -51,6 +85,7 @@ TEST_F(GameFixture, flip_corner_cells_tests) {
 
 
     //Upper right corner case
+
     FlipCellState((FIELD_WIDTH-1)*10, 0);
     EXPECT_EQ(start_field[0][FIELD_WIDTH-2], false);
     EXPECT_EQ(start_field[0][FIELD_WIDTH-1], true);
@@ -65,6 +100,7 @@ TEST_F(GameFixture, flip_corner_cells_tests) {
 
 
     //Lower right corner case
+
     FlipCellState((FIELD_WIDTH-1)*10, (FIELD_HEIGHT-1)*10);
     EXPECT_EQ(start_field[FIELD_HEIGHT-2][FIELD_WIDTH-2], false);
     EXPECT_EQ(start_field[FIELD_HEIGHT-2][FIELD_WIDTH-1], false);
@@ -138,6 +174,7 @@ TEST_F(GameFixture, make_game_step_function_tests) {
 
 
     //Check if game stops, when game fields doesn't update
+
     game_state = GameState::EDITING;
     current_field = start_field;
     MakeGameStep();
@@ -151,6 +188,7 @@ TEST_F(GameFixture, make_game_step_function_tests) {
 
 
     //Check if simple oscillator works correctly
+
     ClearFields();
     FlipCellState(10, 10);
     FlipCellState(10, 20);
@@ -195,7 +233,6 @@ TEST_F(GameFixture, make_game_step_function_tests) {
     EXPECT_EQ(current_field[4][0], false);
     EXPECT_EQ(current_field[4][1], false);
     EXPECT_EQ(current_field[4][2], false);
-
 
 }
 
