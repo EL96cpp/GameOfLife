@@ -1,6 +1,8 @@
 
 #include <gmock/gmock-matchers.h>
 #include <gtest/gtest.h>
+#include <chrono>
+#include <thread>
 
 #include "gamefixture.h"
 
@@ -103,4 +105,67 @@ TEST_F(GameFixture, inner_cells_flip_tests) {
     EXPECT_EQ(start_field[2][1], false);
     EXPECT_EQ(start_field[2][2], false);
 
+    //Center cell
+
+    FlipCellState(((FIELD_WIDTH-1)/2)*10, ((FIELD_HEIGHT-1)/2)*10);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2-1][(FIELD_WIDTH-1)/2-1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2-1][(FIELD_WIDTH-1)/2], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2-1][(FIELD_WIDTH-1)/2+1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2][(FIELD_WIDTH-1)/2-1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2][(FIELD_WIDTH-1)/2], true);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2][(FIELD_WIDTH-1)/2+1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2+1][(FIELD_WIDTH-1)/2-1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2+1][(FIELD_WIDTH-1)/2], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2+1][(FIELD_WIDTH-1)/2+1], false);
+
+    FlipCellState(((FIELD_WIDTH-1)/2)*10, ((FIELD_HEIGHT-1)/2)*10);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2-1][(FIELD_WIDTH-1)/2-1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2-1][(FIELD_WIDTH-1)/2], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2-1][(FIELD_WIDTH-1)/2+1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2][(FIELD_WIDTH-1)/2-1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2][(FIELD_WIDTH-1)/2], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2][(FIELD_WIDTH-1)/2+1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2+1][(FIELD_WIDTH-1)/2-1], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2+1][(FIELD_WIDTH-1)/2], false);
+    EXPECT_EQ(start_field[(FIELD_HEIGHT-1)/2+1][(FIELD_WIDTH-1)/2+1], false);
+
 }
+
+TEST_F(GameFixture, start_and_stop_functions_tests) {
+
+    //Check if game stops, when there is no field changes
+    StartGame();
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    EXPECT_EQ(game_state, GameState::STOPPED);
+
+    FlipCellState(1, 1);
+    StartGame();
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    EXPECT_EQ(game_state, GameState::STOPPED);
+
+    //Start and stop simple oscillator
+    FlipCellState(1,1);
+    FlipCellState(1, 2);
+    FlipCellState(1, 3);
+    StartGame();
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    EXPECT_EQ(game_state, GameState::RUNNING);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    EXPECT_EQ(game_state, GameState::RUNNING);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    EXPECT_EQ(game_state, GameState::RUNNING);
+
+    StopGame();
+    EXPECT_EQ(game_state, GameState::STOPPED);
+
+    StartGame();
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    EXPECT_EQ(game_state, GameState::RUNNING);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    EXPECT_EQ(game_state, GameState::RUNNING);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    EXPECT_EQ(game_state, GameState::RUNNING);
+
+
+}
+
