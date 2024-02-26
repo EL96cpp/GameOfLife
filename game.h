@@ -25,7 +25,7 @@ public:
     GameState GetGameState();
     QVector<QVector<bool>> GetStartField();
 
-protected slots:
+public slots:
     void StartGame();
     void StopGame();
     void RestartGame();

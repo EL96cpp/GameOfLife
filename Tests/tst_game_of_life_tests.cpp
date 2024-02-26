@@ -8,6 +8,7 @@
 
 using namespace testing;
 
+
 TEST_F(GameFixture, initial_tests) {
 
     EXPECT_EQ(start_field, current_field);
@@ -15,6 +16,7 @@ TEST_F(GameFixture, initial_tests) {
     EXPECT_EQ(start_field.size(), FIELD_HEIGHT);
     EXPECT_EQ(start_field[0].size(), FIELD_WIDTH);
     EXPECT_EQ(game_state, GameState::EDITING);
+    EXPECT_EQ(game_speed, 3);
 
 }
 
@@ -131,40 +133,68 @@ TEST_F(GameFixture, inner_cells_flip_tests) {
 
 }
 
-TEST_F(GameFixture, start_and_stop_functions_tests) {
 
-    //Check if game stops, when there is no field changes
-    StartGame();
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+TEST_F(GameFixture, make_game_step_function_tests) {
+
+
+    //Check if game stops, when game fields doesn't update
+    game_state = GameState::EDITING;
+    current_field = start_field;
+    MakeGameStep();
     EXPECT_EQ(game_state, GameState::STOPPED);
 
-    FlipCellState(1, 1);
-    StartGame();
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+
+    ClearFields();
+    FlipCellState(10, 10);
+    MakeGameStep();
     EXPECT_EQ(game_state, GameState::STOPPED);
 
-    //Start and stop simple oscillator
-    FlipCellState(1,1);
-    FlipCellState(1, 2);
-    FlipCellState(1, 3);
-    StartGame();
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    EXPECT_EQ(game_state, GameState::RUNNING);
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    EXPECT_EQ(game_state, GameState::RUNNING);
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    EXPECT_EQ(game_state, GameState::RUNNING);
 
-    StopGame();
-    EXPECT_EQ(game_state, GameState::STOPPED);
+    //Check if simple oscillator works correctly
+    ClearFields();
+    FlipCellState(10, 10);
+    FlipCellState(10, 20);
+    FlipCellState(10, 30);
 
-    StartGame();
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    EXPECT_EQ(game_state, GameState::RUNNING);
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    EXPECT_EQ(game_state, GameState::RUNNING);
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    EXPECT_EQ(game_state, GameState::RUNNING);
+    current_field = start_field;
+
+    EXPECT_EQ(current_field[1][1], true);
+    EXPECT_EQ(current_field[2][1], true);
+    EXPECT_EQ(current_field[3][1], true);
+
+    MakeGameStep();
+    EXPECT_EQ(current_field[0][0], false);
+    EXPECT_EQ(current_field[0][1], false);
+    EXPECT_EQ(current_field[0][2], false);
+    EXPECT_EQ(current_field[1][0], false);
+    EXPECT_EQ(current_field[1][1], false);
+    EXPECT_EQ(current_field[1][2], false);
+    EXPECT_EQ(current_field[2][0], true);
+    EXPECT_EQ(current_field[2][1], true);
+    EXPECT_EQ(current_field[2][2], true);
+    EXPECT_EQ(current_field[3][0], false);
+    EXPECT_EQ(current_field[3][1], false);
+    EXPECT_EQ(current_field[3][2], false);
+    EXPECT_EQ(current_field[4][0], false);
+    EXPECT_EQ(current_field[4][1], false);
+    EXPECT_EQ(current_field[4][2], false);
+
+    MakeGameStep();
+    EXPECT_EQ(current_field[0][0], false);
+    EXPECT_EQ(current_field[0][1], false);
+    EXPECT_EQ(current_field[0][2], false);
+    EXPECT_EQ(current_field[1][0], false);
+    EXPECT_EQ(current_field[1][1], true);
+    EXPECT_EQ(current_field[1][2], false);
+    EXPECT_EQ(current_field[2][0], false);
+    EXPECT_EQ(current_field[2][1], true);
+    EXPECT_EQ(current_field[2][2], false);
+    EXPECT_EQ(current_field[3][0], false);
+    EXPECT_EQ(current_field[3][1], true);
+    EXPECT_EQ(current_field[3][2], false);
+    EXPECT_EQ(current_field[4][0], false);
+    EXPECT_EQ(current_field[4][1], false);
+    EXPECT_EQ(current_field[4][2], false);
 
 
 }

@@ -2,7 +2,8 @@
 
 Game::Game(QObject *parent)
     : QObject{parent}
-    , game_state(GameState::EDITING) {
+    , game_state(GameState::EDITING)
+    , game_speed(3) {
 
     for (int i = 0; i < FIELD_HEIGHT; ++i) {
 
@@ -68,15 +69,26 @@ void Game::StartGame() {
 
     }
 
+    qDebug() << "Start game";
+
     game_state = GameState::RUNNING;
     game_timer.start(1000/(game_speed*game_speed));
+
+    qDebug() << "Start timer";
 
 }
 
 void Game::StopGame() {
 
     game_state = GameState::STOPPED;
-    game_timer.stop();
+
+    if (game_timer.isActive()) {
+
+        game_timer.stop();
+
+    }
+
+    qDebug() << "game stopped!";
 
 }
 
