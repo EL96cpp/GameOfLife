@@ -5,9 +5,15 @@ GameFixture::GameFixture() {
 
 }
 
-void GameFixture::SetUp()
-{
+void GameFixture::SetUp() {
+
     qDebug() << "Start tests";
+
+    if (first_test) {
+
+        return;
+
+    }
 
     for (int i = 0; i < FIELD_HEIGHT; ++i) {
 
@@ -29,8 +35,23 @@ void GameFixture::SetUp()
 
 }
 
-void GameFixture::TearDown()
-{
+void GameFixture::TearDown() {
+
     qDebug() << "End tests";
+
+    for (int i = 0; i < start_field.size(); ++i) {
+
+        start_field[i].clear();
+        current_field[i].clear();
+        next_field[i].clear();
+
+    }
+
+    start_field.clear();
+    current_field.clear();
+    next_field.clear();
+
+    game_state = GameState::EDITING;
+
 }
 

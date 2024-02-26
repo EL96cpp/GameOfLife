@@ -14,6 +14,7 @@ public:
     void TearDown() override;
 
 protected:
+    bool first_test = true;
 
 };
 
