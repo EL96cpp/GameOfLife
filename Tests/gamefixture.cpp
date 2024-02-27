@@ -7,8 +7,6 @@ GameFixture::GameFixture() {
 
 void GameFixture::SetUp() {
 
-    qDebug() << "Start tests";
-
     if (first_test) {
 
         return;
@@ -36,8 +34,6 @@ void GameFixture::SetUp() {
 }
 
 void GameFixture::TearDown() {
-
-    qDebug() << "End tests";
 
     for (int i = 0; i < start_field.size(); ++i) {
 

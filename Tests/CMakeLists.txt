@@ -35,11 +35,13 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 add_executable(game_of_life_tests main.cpp
-               tst_game_of_life_tests.cpp
+               tst_game_of_life_fixture_tests.cpp
+               tst_game_of_life_parameterized_tests.cpp
                ../game.cpp
                ../game.h
                gamefixture.cpp
                gamefixture.h
+               gameparameterized.h
 )
 add_test(NAME game_of_life_tests COMMAND game_of_life_tests)
 
