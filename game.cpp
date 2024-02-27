@@ -143,6 +143,8 @@ void Game::ChangeGameSpeed(int game_speed) {
 void Game::LoadField(QVector<QVector<bool> > &loaded_field) {
 
     start_field = loaded_field;
+    current_field = start_field;
+    game_state = GameState::EDITING;
     emit UpdateGameScene(start_field);
 
 }
