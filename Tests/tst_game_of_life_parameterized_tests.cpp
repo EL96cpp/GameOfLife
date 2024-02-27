@@ -68,6 +68,8 @@ TEST_P(GameParameterized, MakeGameStep_stop_tests) {
 
     QVector<QVector<bool>> field_parameter = GetParam();
     LoadField(field_parameter);
+    EXPECT_EQ(field_parameter, start_field);
+
     current_field = start_field;
     game_state = GameState::RUNNING;
 
