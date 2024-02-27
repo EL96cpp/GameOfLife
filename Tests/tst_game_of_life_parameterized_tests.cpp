@@ -61,21 +61,41 @@ QVector<QVector<bool>> GetHomogeneousField(const bool& is_alive) {
 
 }
 
-TEST_P(GameParameterized, load_function_tests) {
+
+TEST_P(GameParameterized, MakeGameStep_stop_tests) {
+
+    ClearFields();
 
     QVector<QVector<bool>> field_parameter = GetParam();
     LoadField(field_parameter);
-    EXPECT_EQ(start_field, field_parameter);
+    current_field = start_field;
+    game_state = GameState::RUNNING;
+
+    MakeGameStep();
+    MakeGameStep();
+
+    EXPECT_EQ(game_state, GameState::STOPPED);
 
 }
 
 INSTANTIATE_TEST_CASE_P(
-    load_function_tests,
+    MakeGameStep_stop_tests,
     GameParameterized,
     ::testing::Values(
-        GetField({{1, 1}, {1, 2}, {1, 3}}),
-        GetField({{1, 1}, {2, 2}, {3, 2}, {3, 1}}),
-        GetField({{4, 4}}),
-        GetHomogeneousField(true),
-        GetHomogeneousField(false)
-        ));
+            GetHomogeneousField(false),
+            GetField({{1, 1}}),
+            GetField({{1, 1}, {3, 3}}),
+            GetField({{1, 1}, {1, 2}, {2, 1}, {2, 2}}),
+            GetField({{47, 20}, {47, 21}, {48, 20}, {48, 21}}),
+            GetField({{79, 10}, {79, 11}, {80, 10}, {80, 11}}),
+            GetField({{3, 3}, {4, 2}, {4, 4}, {5, 2}, {5, 4}, {6, 3}}),
+            GetField({{33, 53}, {34, 52}, {34, 54}, {35, 52}, {35, 54}, {36, 53}}),
+            GetField({{73, 73}, {74, 72}, {74, 74}, {75, 72}, {75, 74}, {76, 73}}),
+            GetField({{1, 0}, {0, 1}, {0, 2}, {1, 3}, {2, 1}, {2, 2}}),
+            GetField({{71, 40}, {70, 41}, {70, 42}, {71, 43}, {72, 41}, {72, 42}}),
+            GetField({{1, 73}, {0, 74}, {0, 75}, {1, 76}, {2, 74}, {2, 75}}),
+            GetField({{FIELD_HEIGHT-1, FIELD_WIDTH-1}})));
+
+
+
+

@@ -204,3 +204,22 @@ bool Game::CalculateCell(const int &i, const int &j) {
     }
 
 }
+
+void Game::debug_print() {
+
+    for (int i = 0; i < current_field.size(); ++i) {
+
+        QString line;
+
+        for (int j = 0; j < current_field[0].size(); ++j) {
+
+            line += (current_field[i][j]) ? "1" : "0";
+
+        }
+
+        qDebug() << line;
+        line.clear();
+
+    }
+
+}

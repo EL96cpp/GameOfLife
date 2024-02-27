@@ -41,6 +41,7 @@ add_executable(game_of_life_tests main.cpp
                ../game.h
                gamefixture.cpp
                gamefixture.h
+               gameparameterized.cpp
                gameparameterized.h
 )
 add_test(NAME game_of_life_tests COMMAND game_of_life_tests)

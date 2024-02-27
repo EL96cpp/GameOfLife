@@ -41,6 +41,7 @@ signals:
 
 protected:
     bool CalculateCell(const int& i, const int& j);
+    void debug_print();
 
 protected:
     QVector<QVector<bool>> start_field;
